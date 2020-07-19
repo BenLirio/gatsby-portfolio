@@ -16,17 +16,15 @@ export const BrowserBar = styled.div`
 
 export const Preview = styled.div`
   width: 100%;
-  height: 50vw;
-  border: 1px solid #eeeeee;
-  border-radius: 1px;
-  border-top: 0;
+  height: 90%;
+  border: 6px solid #999999;
   box-sizing: border-box;
 `;
 
 export const Grid = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(3, 3fr);
   grid-template-rows: 8fr;
   gap: 1.2rem 1.2rem;
 
@@ -45,6 +43,7 @@ export const Item = styled.div`
   overflow: hidden;
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.11);
 
+  cursor: pointer;
   h4 {
     color: ${({ theme }) => (theme === 'light' ? '#212121' : '#fff')};
   }

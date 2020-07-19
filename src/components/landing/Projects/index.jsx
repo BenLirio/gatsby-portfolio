@@ -6,47 +6,62 @@ import Star from 'components/common/Icons/Star';
 import Fork from 'components/common/Icons/Fork';
 import { Wrapper, Grid, Item, Content, Stats, Preview, BrowserBar } from './styles';
 import browserBar from '../../../assets/illustrations/browserBar.svg'
-
+import Modal from 'react-modal'
+import { useState } from 'react';
+import './modalStyles.css'
+import { createContext } from 'react';
+import close from '../../../assets/icons/close-24px.svg'
+const ModalContext = createContext()
+const ProjectModal= ({ title, children }) => {
+  const [modal, requestClose] = useContext(ModalContext)
+  return (
+    <Modal
+      isOpen={modal === title}
+      onRequestClose={requestClose}
+  >
+      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+        <h2>{title}</h2>
+        <img src={close} onClick={requestClose}></img>
+    </div>
+      {children}
+    </Modal>
+  )
+}
 export const Projects = () => {
+  const [modal, setModal] = useState(null)
   const { theme } = useContext(ThemeContext);
   const projects = [
     {
-      name: 'project 1',
-      url: 'google.com',
-      description: 'asdf',
-      stargazers: {
-        totalCount: 3
-      },
-      forkCount: 3
+      title: 'Fiction Writter',
+      description: 'Write down your thoughts. Use Natural Language Processing to generate new ideas when you run out',
     }
   ]
+  const openProject = (project) => {
+    setModal(project)
+  }
+  const closeProject = () => {
+    setModal(null)
+  }
   return (
     <Wrapper as={Container} id="projects">
-      <h2>Projects</h2>
-      <Grid>
-        {projects.map((project) => (
-          <Item key={project.name} as="a" href={project.url} target="_blank" rel="noopener noreferrer" theme={theme}>
-            <Card theme={theme}>
-              <Content>
-                <h4>{project.name}</h4>
-                <p>{project.description}</p>
-              </Content>
-              <BrowserBar />
-              <Preview as="iframe" allowfullscreen={true} src="https://benlirio.github.io/fiction-client/#/"></Preview>
-              <Stats theme={theme}>
-                <div>
-                  <Star color={theme === 'light' ? '#000' : '#fff'} />
-                  <span>{project.stargazers.totalCount}</span>
-                </div>
-                <div>
-                  <Fork color={theme === 'light' ? '#000' : '#fff'} />
-                  <span>{project.forkCount}</span>
-                </div>
-              </Stats>
-            </Card>
-          </Item>
-        ))}
-      </Grid>
+      <ModalContext.Provider value={[modal, closeProject]}>
+        <h2>Projects</h2>
+        <ProjectModal title="Fiction Writter">
+          <Preview as="iframe" allowfullscreen={true} src="https://benlirio.github.io/fiction-client/#/"></Preview>
+        </ProjectModal>
+        <Grid>
+          {projects.map((project) => (
+            <Item key={project.title} onClick={() => openProject(project.title)} theme={theme}>
+              <Card theme={theme}>
+                <Content>
+                  <h4>{project.title}</h4>
+                  <p>{project.description}</p>
+                </Content>
+              </Card>
+            </Item>
+          ))}
+        </Grid>
+      </ModalContext.Provider>
     </Wrapper>
   );
 };
