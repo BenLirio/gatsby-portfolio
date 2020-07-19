@@ -32,9 +32,17 @@ export const Projects = () => {
   const { theme } = useContext(ThemeContext);
   const projects = [
     {
+      title: "Relay Resource",
+      description: "COVID-19 resource - Tips and advice"
+    },
+    {
       title: 'Fiction Writter',
       description: 'Write down your thoughts. Use Natural Language Processing to generate new ideas when you run out',
-    }
+    },
+    {
+      title: "Healthy Smile",
+      description: "Business website for a Dentist"
+    },
   ]
   const openProject = (project) => {
     setModal(project)
@@ -45,9 +53,15 @@ export const Projects = () => {
   return (
     <Wrapper as={Container} id="projects">
       <ModalContext.Provider value={[modal, closeProject]}>
-        <h2>Projects</h2>
+        <h2>Live View</h2>
+        <ProjectModal title="Relay Resource">
+          <Preview as="iframe" allowfullscreen={true} src="https://relay-resource.web.app" />
+        </ProjectModal>
         <ProjectModal title="Fiction Writter">
           <Preview as="iframe" allowfullscreen={true} src="https://benlirio.github.io/fiction-client/#/"></Preview>
+        </ProjectModal>
+        <ProjectModal title="Healthy Smile">
+          <Preview as="iframe" allowfullscreen={true} src="https://onahealthysmile.com/cosmetic" />
         </ProjectModal>
         <Grid>
           {projects.map((project) => (
