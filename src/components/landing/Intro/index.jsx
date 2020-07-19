@@ -3,11 +3,22 @@ import AnchorLink from 'react-anchor-link-smooth-scroll';
 import { ThemeContext } from 'providers/ThemeProvider';
 import { Header } from 'components/theme';
 import { Container, Button } from 'components/common';
-import dev from 'assets/illustrations/dev.svg';
 import { Wrapper, IntroWrapper, Details, Thumbnail } from './styles';
+import { useStaticQuery, graphql } from 'gatsby';
+import Img from 'gatsby-image'
 
 export const Intro = () => {
   const { theme } = useContext(ThemeContext);
+
+  const { imageSharp }= useStaticQuery(graphql`
+    query {
+      imageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid
+        } 
+      }
+    }
+  `)
 
   return (
     <Wrapper>
@@ -21,7 +32,7 @@ export const Intro = () => {
           </Button>
         </Details>
         <Thumbnail>
-          <img src={dev} alt="I’m John and I’m a JAMStack engineer!" />
+          <Img style={{borderRadius: '50%'}} fluid={imageSharp.fluid}></Img>
         </Thumbnail>
       </IntroWrapper>
     </Wrapper>

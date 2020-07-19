@@ -4,59 +4,43 @@ import { ThemeContext } from 'providers/ThemeProvider';
 import { Container, Card } from 'components/common';
 import Star from 'components/common/Icons/Star';
 import Fork from 'components/common/Icons/Fork';
-import { Wrapper, Grid, Item, Content, Stats } from './styles';
+import { Wrapper, Grid, Item, Content, Stats, Preview, BrowserBar } from './styles';
+import browserBar from '../../../assets/illustrations/browserBar.svg'
 
 export const Projects = () => {
   const { theme } = useContext(ThemeContext);
-  const {
-    github: {
-      viewer: {
-        repositories: { edges },
+  const projects = [
+    {
+      name: 'project 1',
+      url: 'google.com',
+      description: 'asdf',
+      stargazers: {
+        totalCount: 3
       },
-    },
-  } = useStaticQuery(
-    graphql`
-      {
-        github {
-          viewer {
-            repositories(first: 8, orderBy: { field: STARGAZERS, direction: DESC }) {
-              edges {
-                node {
-                  id
-                  name
-                  url
-                  description
-                  stargazers {
-                    totalCount
-                  }
-                  forkCount
-                }
-              }
-            }
-          }
-        }
-      }
-    `
-  );
+      forkCount: 3
+    }
+  ]
   return (
     <Wrapper as={Container} id="projects">
-      <h2>GitHub projects</h2>
+      <h2>Projects</h2>
       <Grid>
-        {edges.map(({ node }) => (
-          <Item key={node.id} as="a" href={node.url} target="_blank" rel="noopener noreferrer" theme={theme}>
+        {projects.map((project) => (
+          <Item key={project.name} as="a" href={project.url} target="_blank" rel="noopener noreferrer" theme={theme}>
             <Card theme={theme}>
               <Content>
-                <h4>{node.name}</h4>
-                <p>{node.description}</p>
+                <h4>{project.name}</h4>
+                <p>{project.description}</p>
               </Content>
+              <BrowserBar />
+              <Preview as="iframe" allowfullscreen={true} src="https://benlirio.github.io/fiction-client/#/"></Preview>
               <Stats theme={theme}>
                 <div>
                   <Star color={theme === 'light' ? '#000' : '#fff'} />
-                  <span>{node.stargazers.totalCount}</span>
+                  <span>{project.stargazers.totalCount}</span>
                 </div>
                 <div>
                   <Fork color={theme === 'light' ? '#000' : '#fff'} />
-                  <span>{node.forkCount}</span>
+                  <span>{project.forkCount}</span>
                 </div>
               </Stats>
             </Card>
