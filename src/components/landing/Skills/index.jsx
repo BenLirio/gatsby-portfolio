@@ -17,11 +17,13 @@ export const Skills = () => {
         <Details theme={theme}>
           <h1>More about me</h1>
           <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-            industry’s standard dummy.
+           The same way some people rely on coffee in the morning, I rely on Spellcheck and Grammarly when I write. Assistive software like these has saved me and countless other many hours. 
+          </p>
+          <p>
+            Knowing that a single software invention can positively impact millions or even billions of people has inspired me to strive to be the best I can in my field.
           </p>
           <Button as={AnchorLink} href="#contact">
-            Hire me
+            Contact
           </Button>
         </Details>
       </SkillsWrapper>
