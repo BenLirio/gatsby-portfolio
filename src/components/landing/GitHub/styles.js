@@ -1,35 +1,18 @@
 import styled from 'styled-components';
-import browserBar from '../../../assets/illustrations/browserBar.svg'
 
 export const Wrapper = styled.div`
   padding: 2rem 0;
 `;
 
-export const BrowserBar = styled.div`
-  width: 100%;
-  height: calc(10px + 5vw);
-  background-image: url(${browserBar});
-  background-size: contain;
-  background-position: bottom;
-  background-repeat: no-repeat;
-`;
-
-export const Preview = styled.div`
-  width: 100%;
-  height: 90%;
-  border: 6px solid #999999;
-  box-sizing: border-box;
-`;
-
 export const Grid = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: repeat(3, 3fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 8fr;
   gap: 1.2rem 1.2rem;
 
   @media (max-width: 960px) {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   @media (max-width: 680px) {
@@ -43,7 +26,6 @@ export const Item = styled.div`
   overflow: hidden;
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.11);
 
-  cursor: pointer;
   h4 {
     color: ${({ theme }) => (theme === 'light' ? '#212121' : '#fff')};
   }

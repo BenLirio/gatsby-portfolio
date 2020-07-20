@@ -16,6 +16,13 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'images',
+        path: `${__dirname}/images`
+      }
+    },
+    {
       resolve: 'gatsby-source-graphql',
       options: {
         typeName: 'GitHub',
